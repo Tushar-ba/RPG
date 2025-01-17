@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.27;
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
@@ -71,7 +71,10 @@ contract roleBaseNFT is Initializable ,ERC721Upgradeable, ERC721URIStorageUpgrad
         }
     }
 
-    function getNFTdetails(uint256 address)
+    function getNFTdetails() public returns(address,Role,uint256,bool) {
+        nftDetails memory info = details(msg.sender);
+        return (info.address,info.Role,info.uint256,info.bool)
+    }
     
     function tokenURI(uint256 tokenId) public view override(ERC721Upgradeable, ERC721URIStorageUpgradeable) returns (string memory) {
         return super.tokenURI(tokenId);
